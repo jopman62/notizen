@@ -1,0 +1,14 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: echo-hello-person
+spec:
+  params:
+    - name: person
+      description: Person to greet
+      default: Sally
+  steps:
+    - name: echo
+      image: registry.redhat.io/ubi8/ubi-minimal
+      script: |
+        echo "Hello $(params.person)"

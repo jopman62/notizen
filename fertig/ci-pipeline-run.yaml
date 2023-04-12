@@ -1,0 +1,29 @@
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  name: ci-pipeline-run
+spec:
+  pipelineRef:
+    name: ci-pipeline
+  params:
+    - name: git-source-url
+      value: https://github.com/dirkdavidis/httpserver-ci-demo.git
+    - name: git-cd-url
+      value: https://github.com/dirkdavidis/httpserver-ci-cd-demo.git
+    - name: image
+      value: image-registry.openshift-image-registry.svc:5000/default/httpserver
+    - name: release-name
+      value: httpserver
+    - name: namespace
+      value: default
+    - name: deploy
+      value: "true"
+  workspaces:
+    - name: shared-data
+      volumeClaimTemplate:
+        spec:
+          accessModes:
+            - ReadWriteOnce
+          resources:
+            requests:
+              storage: 5Gi

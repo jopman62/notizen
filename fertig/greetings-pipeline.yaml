@@ -1,0 +1,37 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: greetings
+spec:
+  params:
+  - name: person
+    type: string
+  tasks:
+    - name: hello-world
+      taskRef:
+        kind: Task
+        name: echo-hello-world
+    - name: hello-person
+      runAfter:
+        - hello-world
+      taskRef:
+        kind: Task
+        name: echo-hello-person
+      params:
+      - name: person
+        value: $(params.person)
+    - name: hello-parallel
+      taskRef:
+        kind: Task
+        name: echo-hello-person
+      params:
+      - name: person
+        value: "parallel person"
+  finally:
+    - name: last-task
+      taskRef:
+        kind: ClusterTask
+        name: tkn
+      params:
+        - name: SCRIPT
+          value: 'echo "Overall status: $(tasks.status)";echo "Logs:";tkn pr logs $(context.pipelineRun.name)'

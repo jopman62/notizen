@@ -1,0 +1,13 @@
+            https://console-openshift-console.apps.ocp4.example.com/
+
+oc get routes --all-namespaces
+NAMESPACE           NAME    HOST/PORT                                         SERVICE           
+openshift-console   console console-openshift-console.apps.ocp4.example.com   console
+
+
+tkn taskrun logs echo-hello-person-run-spdwx -f -n default
+
+------------
+lab install-troubleshoot start
+
+

@@ -1,0 +1,10 @@
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  name: greetings-run
+spec:
+  pipelineRef:
+    name: greetings
+  params:
+  - name: person
+    value: "Alice"
