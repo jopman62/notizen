@@ -1,3 +1,6 @@
+kubeadmin
+
+-------------
             https://console-openshift-console.apps.ocp4.example.com/
 
 oc get routes --all-namespaces
@@ -10,4 +13,5 @@ tkn taskrun logs echo-hello-person-run-spdwx -f -n default
 ------------
 lab install-troubleshoot start
 
-
+------------
+WdBz8-mLKk9-yVN75-UhaiU
